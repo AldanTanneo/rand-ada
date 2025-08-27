@@ -1,0 +1,30 @@
+name = "rand"
+description = "Random number generation toolkit"
+version = "0.1.0-dev"
+
+authors = ["César SAGAERT"]
+maintainers = ["César SAGAERT <sagaert@adacore.com>"]
+maintainers-logins = ["AldanTanneo"]
+licenses = "GPL-3.0-or-later"
+website = "https://github.com/AldanTanneo/rand-ada"
+tags = ["random", "chacha20", "rng", "getrandom", "security"]
+
+[test]
+runner = "alire"
+
+[build-switches]
+"*".ada_version = "Ada2022"
+
+[[depends-on]]
+rand_chacha = "~0.1.0"
+rand_core = "~0.1.0"
+rand_distributions = "~0.1.0"
+rand_xoshiro256 = "~0.1.0"
+rand_sys = "~0.1.0"
+
+[[pins]]
+rand_core = { path='./rand_core' }
+rand_chacha = { path='./rand_chacha' }
+rand_distributions = { path = './rand_distributions' }
+rand_sys = { path='./rand_sys' }
+rand_xoshiro256 = { path='./rand_xoshiro256' }
