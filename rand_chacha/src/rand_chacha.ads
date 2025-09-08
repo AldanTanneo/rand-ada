@@ -6,6 +6,10 @@ package Rand_Chacha is
    type ChaCha_Rng (Kind : ChaCha_Kind) is limited
      new Generators.Rng with private;
 
+   subtype ChaCha8_Rng is ChaCha_Rng (ChaCha8);
+   subtype ChaCha12_Rng is ChaCha_Rng (ChaCha12);
+   subtype ChaCha20_Rng is ChaCha_Rng (ChaCha20);
+
    overriding
    function Next (R : in out ChaCha_Rng) return U64;
 

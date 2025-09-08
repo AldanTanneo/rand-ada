@@ -3,8 +3,9 @@ with Rand_Sys;
 
 package body Rand.Thread_Local is
    package ChaCha renames Rand_Chacha;
+   subtype ChaCha12_Rng is ChaCha.ChaCha12_Rng;
 
-   Thread_Local_Rng : access ChaCha.ChaCha_Rng := null
+   Thread_Local_Rng : access ChaCha12_Rng := null
    with Thread_Local_Storage;
 
    function Get return Thread_Rng is
@@ -14,7 +15,7 @@ package body Rand.Thread_Local is
          --  safe because no other thread can access this during
          --  initialisation
          Thread_Local_Rng :=
-           new ChaCha.ChaCha_Rng'(ChaCha.From_Rng (R, ChaCha.ChaCha12));
+           new ChaCha12_Rng'(ChaCha.From_Rng (R, ChaCha.ChaCha12));
       end if;
       return Res : Thread_Rng;
    end Get;
@@ -24,7 +25,7 @@ package body Rand.Thread_Local is
    function Next (R : in out Thread_Rng) return Core.U64
    is (Thread_Local_Rng.Next);
 
-   procedure Next_Bytes (R : in out Thread_Rng; Buf : out Bytes) is
+   procedure Next_Bytes (R : in out Thread_Rng; Buf : out Core.Bytes) is
    begin
       Thread_Local_Rng.Next_Bytes (Buf);
    end Next_Bytes;

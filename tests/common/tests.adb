@@ -1,7 +1,7 @@
 package body Tests is
+   use Rand.Core;
 
-   function Parse_Hex_String (S : String) return Rand.Bytes is
-      use Rand.Core;
+   function Parse_Hex_String (S : String) return Bytes is
       use all type U8;
       pragma Assert (S'Length mod 2 = 0);
       function Char_To_Byte (C : Character) return U8 is
@@ -32,4 +32,5 @@ package body Tests is
       end loop;
       return Res;
    end Parse_Hex_String;
+
 end Tests;

@@ -8,7 +8,7 @@ package Rand.Thread_Local is
    function Next (R : in out Thread_Rng) return Core.U64
    with Inline;
    overriding
-   procedure Next_Bytes (R : in out Thread_Rng; Buf : out Bytes)
+   procedure Next_Bytes (R : in out Thread_Rng; Buf : out Core.Bytes)
    with Inline;
 
    function Get return Thread_Rng
