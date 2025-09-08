@@ -6,5 +6,5 @@ pragma Warnings (On);
 with Rand;
 
 package Tests is
-   function Parse_Hex_String (S : String) return Rand.Bytes;
+   function Parse_Hex_String (S : String) return Rand.Core.Bytes;
 end Tests;

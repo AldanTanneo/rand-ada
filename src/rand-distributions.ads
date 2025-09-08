@@ -14,6 +14,9 @@ package Rand.Distributions is
    package Long_Int_Distr is new Generic_Distribution (Long_Integer);
    package Long_Long_Int_Distr is new Generic_Distribution (Long_Long_Integer);
 
+   package Natural_Distr is new Generic_Distribution (Natural);
+   package Positive_Distr is new Generic_Distribution (Positive);
+
    package U8_Distr is new Generic_Distribution (U8);
    package U16_Distr is new Generic_Distribution (U16);
    package U32_Distr is new Generic_Distribution (U32);
@@ -23,6 +26,11 @@ package Rand.Distributions is
    package Uniform is
       package Uniform_Int is new
         Rand_Distributions.Uniform.Discrete (Integer, Int_Distr);
+      package Uniform_Nat is new
+        Rand_Distributions.Uniform.Discrete (Natural, Natural_Distr);
+      package Uniform_Pos is new
+        Rand_Distributions.Uniform.Discrete (Positive, Positive_Distr);
+
       package Uniform_Float is new
         Rand_Distributions.Uniform.Floating_Point (Float, Float_Distr);
    end Uniform;

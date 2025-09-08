@@ -2,17 +2,18 @@ with Rand; use Rand;
 -- with Ada.Text_IO;
 
 procedure Tests.ChaCha20 is
-   use all type Bytes;
+   use ChaCha;
+   use Core;
 
-   type Seed_Array is array (Positive range <>) of ChaCha.Seed_Type;
+   type Seed_Array is array (Positive range <>) of Seed_Type;
    type Keystream_Array is array (Positive range <>) of Bytes (1 .. 60);
 
    -- array of test keys
 
    Keys : constant Seed_Array :=
      [[others => 0], -- all zeros
-      [ChaCha.Seed_Type'Last => 1, others => 0], -- all zeros except last
-      [for I in ChaCha.Seed_Type'Range => Core.U8 (I - 1)], -- increasing
+      [Seed_Type'Last => 1, others => 0], -- all zeros except last
+      [for I in Seed_Type'Range => Core.U8 (I - 1)], -- increasing
       -- randomly generated
       Parse_Hex_String
         ("99979bcd97601e0f80159b8ba648e33f05dd7e5fa60662d99b90b159fc46d29b")];
@@ -36,7 +37,8 @@ begin
    for I in Keys'Range loop
       declare
          Buf : Bytes (1 .. 60);
-         R   : Rng'Class := ChaCha.Create_Seeded (Keys (I), ChaCha.ChaCha20);
+         R   : ChaCha20_Rng :=
+           ChaCha.Create_Seeded (Keys (I), ChaCha.ChaCha20);
       begin
          R.Next_Bytes (Buf);
          -- Ada.Text_IO.Put_Line ("Got : " & Buf'Image);
