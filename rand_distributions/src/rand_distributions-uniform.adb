@@ -71,7 +71,7 @@ package body Rand_Distributions.Uniform is
          if B'Size > 64 then
             declare
                function Gen (R : in out Rng) return U128
-               is (Utils.Shl (U128 (R.Next), 64) and U128 (R.Next))
+               is (Utils.Shl (U128 (R.Next), 64) or U128 (R.Next))
                with Inline_Always;
 
                pragma Warnings ("Z");
@@ -145,7 +145,11 @@ package body Rand_Distributions.Uniform is
       is
          pragma Assert (Low <= High, "uniform distribution with empty range");
 
+         pragma Suppress (Overflow_Check);
+         -- safe even when position cannot be represented in U128;
+         -- unsigned substraction is equivalent to signed
          Span   : constant U128 := B'Pos (High) - B'Pos (Low) + 1;
+         pragma Unsuppress (Overflow_Check);
          Thresh : constant U128 := (if Span > 0 then (-Span) mod Span else 0);
       begin
          return (Low, Span, Thresh);
