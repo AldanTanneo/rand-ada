@@ -5,63 +5,84 @@ use Rand_Distributions;
 package Rand.Distributions is
    use Core;
 
-   package Bool_Distr is new Generic_Distribution (Boolean);
+   package Interfaces is
+      package Bool_Distr is new Generic_Distribution (Boolean);
 
-   package Float_Distr is new Generic_Distribution (Float);
-   package Long_Float_Distr is new Generic_Distribution (Long_Float);
-   package Long_Long_Float_Distr is new Generic_Distribution (Long_Long_Float);
+      package Float_Distr is new Generic_Distribution (Float);
+      package Long_Float_Distr is new Generic_Distribution (Long_Float);
+      package Long_Long_Float_Distr is new
+        Generic_Distribution (Long_Long_Float);
 
-   package Int_Distr is new Generic_Distribution (Integer);
-   package Long_Int_Distr is new Generic_Distribution (Long_Integer);
-   package Long_Long_Int_Distr is new Generic_Distribution (Long_Long_Integer);
+      package Int_Distr is new Generic_Distribution (Integer);
+      package Long_Int_Distr is new Generic_Distribution (Long_Integer);
+      package Long_Long_Int_Distr is new
+        Generic_Distribution (Long_Long_Integer);
 
-   package Natural_Distr is new Generic_Distribution (Natural);
-   package Positive_Distr is new Generic_Distribution (Positive);
+      package Natural_Distr is new Generic_Distribution (Natural);
+      package Positive_Distr is new Generic_Distribution (Positive);
 
-   package U8_Distr is new Generic_Distribution (U8);
-   package U16_Distr is new Generic_Distribution (U16);
-   package U32_Distr is new Generic_Distribution (U32);
-   package U64_Distr is new Generic_Distribution (U64);
-   package U128_Distr is new Generic_Distribution (U128);
+      package U8_Distr is new Generic_Distribution (U8);
+      package U16_Distr is new Generic_Distribution (U16);
+      package U32_Distr is new Generic_Distribution (U32);
+      package U64_Distr is new Generic_Distribution (U64);
+      package U128_Distr is new Generic_Distribution (U128);
+
+      package I8_Distr is new Generic_Distribution (I8);
+      package I16_Distr is new Generic_Distribution (I16);
+      package I32_Distr is new Generic_Distribution (I32);
+      package I64_Distr is new Generic_Distribution (I64);
+      package I128_Distr is new Generic_Distribution (I128);
+   end Interfaces;
+
+   use Interfaces;
+
+   -- standard distributions
 
    package Bernoulli is new Rand_Distributions.Bernoulli (Bool_Distr);
 
-   package Uniform is
-      package Uniform_Float is new
-        Rand_Distributions.Uniform.Floating_Point (Float, Float_Distr);
-      package Uniform_Long_Float is new
-        Rand_Distributions.Uniform.Floating_Point
-          (Long_Float,
-           Long_Float_Distr);
-      package Uniform_Long_Long_Float is new
-        Rand_Distributions.Uniform.Floating_Point
-          (Long_Long_Float,
-           Long_Long_Float_Distr);
+   package Uniform_Float is new
+     Rand_Distributions.Uniform.Floating_Point (Float, Float_Distr);
+   package Uniform_Long_Float is new
+     Rand_Distributions.Uniform.Floating_Point (Long_Float, Long_Float_Distr);
+   package Uniform_Long_Long_Float is new
+     Rand_Distributions.Uniform.Floating_Point
+       (Long_Long_Float,
+        Long_Long_Float_Distr);
 
-      package Uniform_Int is new
-        Rand_Distributions.Uniform.Discrete (Integer, Int_Distr);
-      package Uniform_Long_Int is new
-        Rand_Distributions.Uniform.Discrete (Long_Integer, Long_Int_Distr);
-      package Uniform_Long_Long_Int is new
-        Rand_Distributions.Uniform.Discrete
-          (Long_Long_Integer,
-           Long_Long_Int_Distr);
+   package Uniform_Int is new
+     Rand_Distributions.Uniform.Discrete (Integer, Int_Distr);
+   package Uniform_Long_Int is new
+     Rand_Distributions.Uniform.Discrete (Long_Integer, Long_Int_Distr);
+   package Uniform_Long_Long_Int is new
+     Rand_Distributions.Uniform.Discrete
+       (Long_Long_Integer,
+        Long_Long_Int_Distr);
 
-      package Uniform_Nat is new
-        Rand_Distributions.Uniform.Discrete (Natural, Natural_Distr);
-      package Uniform_Pos is new
-        Rand_Distributions.Uniform.Discrete (Positive, Positive_Distr);
+   package Uniform_Nat is new
+     Rand_Distributions.Uniform.Discrete (Natural, Natural_Distr);
+   package Uniform_Pos is new
+     Rand_Distributions.Uniform.Discrete (Positive, Positive_Distr);
 
-      package Uniform_U8 is new
-        Rand_Distributions.Uniform.Discrete (U8, U8_Distr);
-      package Uniform_U16 is new
-        Rand_Distributions.Uniform.Discrete (U16, U16_Distr);
-      package Uniform_U32 is new
-        Rand_Distributions.Uniform.Discrete (U32, U32_Distr);
-      package Uniform_U64 is new
-        Rand_Distributions.Uniform.Discrete (U64, U64_Distr);
-      package Uniform_U128 is new
-        Rand_Distributions.Uniform.Discrete (U128, U128_Distr);
-   end Uniform;
+   package Uniform_U8 is new
+     Rand_Distributions.Uniform.Discrete (U8, U8_Distr);
+   package Uniform_U16 is new
+     Rand_Distributions.Uniform.Discrete (U16, U16_Distr);
+   package Uniform_U32 is new
+     Rand_Distributions.Uniform.Discrete (U32, U32_Distr);
+   package Uniform_U64 is new
+     Rand_Distributions.Uniform.Discrete (U64, U64_Distr);
+   package Uniform_U128 is new
+     Rand_Distributions.Uniform.Discrete (U128, U128_Distr);
+
+   package Uniform_I8 is new
+     Rand_Distributions.Uniform.Discrete (I8, I8_Distr);
+   package Uniform_I16 is new
+     Rand_Distributions.Uniform.Discrete (I16, I16_Distr);
+   package Uniform_I32 is new
+     Rand_Distributions.Uniform.Discrete (I32, I32_Distr);
+   package Uniform_I64 is new
+     Rand_Distributions.Uniform.Discrete (I64, I64_Distr);
+   package Uniform_I128 is new
+     Rand_Distributions.Uniform.Discrete (I128, I128_Distr);
 
 end Rand.Distributions;
