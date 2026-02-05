@@ -46,10 +46,7 @@ package body Rand_Chacha is
    end From_Rng;
 
    function Num_Double_Rounds (R : ChaCha_Rng) return Positive
-   is (case R.Kind is
-         when ChaCha8 => 4,
-         when ChaCha12 => 6,
-         when ChaCha20 => 10)
+   is (ChaCha_Kind'Enum_Rep (R.Kind))
    with Inline_Always;
 
    procedure Do_Rounds (R : in out ChaCha_Rng) is

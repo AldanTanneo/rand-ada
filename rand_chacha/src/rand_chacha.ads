@@ -3,6 +3,10 @@ use Rand_Core;
 
 package Rand_Chacha is
    type ChaCha_Kind is (ChaCha8, ChaCha12, ChaCha20);
+   --  Determines the number of rounds in the RNG
+   for ChaCha_Kind use (ChaCha8 => 4, ChaCha12 => 6, ChaCha20 => 10);
+   --  set enum repr to be number of double rounds in the algorithm
+
    type ChaCha_Rng (Kind : ChaCha_Kind) is limited
      new Generators.Rng with private;
 
