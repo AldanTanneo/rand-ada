@@ -1,5 +1,4 @@
 with Rand; use Rand;
--- with Ada.Text_IO;
 
 procedure Tests.ChaCha20 is
    use ChaCha;
@@ -41,8 +40,6 @@ begin
            ChaCha.Create_Seeded (Keys (I), ChaCha.ChaCha20);
       begin
          R.Next_Bytes (Buf);
-         -- Ada.Text_IO.Put_Line ("Got : " & Buf'Image);
-         -- Ada.Text_IO.Put_Line ("Exp : " & Expected (I)'Image);
          Assert (Buf = Expected (I));
       end;
    end loop;
