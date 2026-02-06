@@ -13,7 +13,17 @@ package Rand is
    subtype Core_Rng is Core.Generators.Rng;
 
    subtype Rng is Core_Rng'Class;
+   --  Random number generator type.
+   --  This is a dispatching class-wide type, for ease of use.
+   --  If you want to avoid the dispatching overhead, use a specific Rng
+   --  implementation type.
 
    function Thread_Rng return Rng
    with Inline;
+   --  Thread local Rng seeded with system entropy.
+   --  This generator should be secure enough for most uses.
+
+   function Small_Rng return Rng
+   with Inline;
+   --  Unsecure generator seeded with system entropy.
 end Rand;

@@ -1,3 +1,5 @@
+--  Instantiations of distributions for various common types.
+
 with Rand_Distributions.Bernoulli;
 with Rand_Distributions.Uniform;
 use Rand_Distributions;

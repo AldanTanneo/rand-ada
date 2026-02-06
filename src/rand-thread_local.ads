@@ -3,6 +3,7 @@
 
 package Rand.Thread_Local is
    type Thread_Rng (<>) is new Core_Rng with private;
+   --  Handle to the thread local Rng.
 
    overriding
    function Next (R : in out Thread_Rng) return Core.U64
@@ -13,6 +14,7 @@ package Rand.Thread_Local is
 
    function Get return Thread_Rng
    with Inline;
+   --  Get (and initialize if needed) the thread local Rng.
 
 private
    type Thread_Rng is new Core_Rng with null record;
