@@ -1,11 +1,10 @@
 package body Tests is
    use Rand.Core;
 
-   function Parse_Hex_String (S : String) return Bytes is
+   function Parse_Hex_String (S : Hex_String) return Bytes is
       use all type U8;
-      pragma Assert (S'Length mod 2 = 0);
-      function Char_To_Byte (C : Character) return U8 is
 
+      function Char_To_Byte (C : Character) return U8 with Pre => Is_Hex (C) is
          function To_U8 (C : Character) return U8
          is (U8 (Character'Pos (C)));
       begin
@@ -19,8 +18,8 @@ package body Tests is
             when 'A' .. 'F' =>
                return To_U8 (C) - To_U8 ('A') + 10;
 
-            when others =>
-               raise Program_Error with "Invalid hex character";
+            when others     =>
+               raise Program_Error with "unreachable";
          end case;
       end Char_To_Byte;
 

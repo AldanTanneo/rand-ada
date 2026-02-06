@@ -36,7 +36,7 @@ package body Rand_Xoshiro256 is
    end Next_Bytes;
 
    function Create_Seeded (Seed : Seed_Type) return Xoshiro256_Rng is
-      Phi : constant U64 := U64 (Ada.Numerics.Pi * Long_Float (2.0**60));
+      Fixed : constant U64 := U64 (Ada.Numerics.Pi * Long_Float (2.0**60));
 
       use all type U8;
    begin
@@ -48,10 +48,10 @@ package body Rand_Xoshiro256 is
             R.S3 := Utils.From_LE_Bytes (Seed (25 .. 32));
          else
             --  if all input bytes are 0, use a fixed non-zero state
-            R.S0 := Phi;
-            R.S1 := Phi + 1;
-            R.S2 := Phi + 2;
-            R.S3 := Phi + 3;
+            R.S0 := Fixed;
+            R.S1 := Fixed + 1;
+            R.S2 := Fixed + 2;
+            R.S3 := Fixed + 3;
          end if;
       end return;
    end Create_Seeded;
