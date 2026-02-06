@@ -10,8 +10,10 @@ package Rand is
    package Xoshiro256 renames Rand_Xoshiro256;
    package Sys renames Rand_Sys;
 
-   subtype Rng is Core.Generators.Rng;
+   subtype Core_Rng is Core.Generators.Rng;
 
-   function Thread_Rng return Rng'Class
+   subtype Rng is Core_Rng'Class;
+
+   function Thread_Rng return Rng
    with Inline;
 end Rand;

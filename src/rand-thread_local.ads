@@ -2,7 +2,7 @@
 --  Implementation may be subject to change.
 
 package Rand.Thread_Local is
-   type Thread_Rng (<>) is new Rng with private;
+   type Thread_Rng (<>) is new Core_Rng with private;
 
    overriding
    function Next (R : in out Thread_Rng) return Core.U64
@@ -15,5 +15,5 @@ package Rand.Thread_Local is
    with Inline;
 
 private
-   type Thread_Rng is new Rng with null record;
+   type Thread_Rng is new Core_Rng with null record;
 end Rand.Thread_Local;

@@ -4,7 +4,7 @@ use Rand;
 procedure Tests.Uniform_Ints is
    use Core;
 
-   R : Rng'Class := Thread_Rng;
+   R : Rng := Thread_Rng;
 
    X  : Integer;
    subtype U1 is Distributions.Interfaces.Int_Distr.Distribution'Class;

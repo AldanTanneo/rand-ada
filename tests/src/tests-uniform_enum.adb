@@ -7,7 +7,7 @@ procedure Tests.Uniform_Enum is
    package T_Distr is new Rand_Distributions.Generic_Distribution (T);
    package T_Uniform is new Rand_Distributions.Uniform.Discrete (T, T_Distr);
 
-   R : Rng'Class := Thread_Rng;
+   R : Rng := Thread_Rng;
    U1 : constant T_Uniform.Distribution := T_Uniform.Create;
    U2 : constant T_Uniform.Distribution := T_Uniform.Create (B, E);
 begin

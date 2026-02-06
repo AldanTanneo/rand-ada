@@ -2,7 +2,7 @@ with Rand.Distributions;
 use Rand;
 
 procedure Tests.Uniform_Floats is
-   R : Rng'Class := Thread_Rng;
+   R : Rng := Thread_Rng;
 
    X  : Float;
    subtype U1 is Distributions.Interfaces.Float_Distr.Distribution'Class;
