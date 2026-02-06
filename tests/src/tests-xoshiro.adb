@@ -25,8 +25,19 @@ procedure Tests.Xoshiro is
        10450023813501588000
      ];
    --!format on
+
+   R    : Rng := Thread_Rng;
+   Gen2 : Xoshiro256.Xoshiro256_Rng := Xoshiro256.From_Rng (R);
+
+   Gen3 : Xoshiro256.Xoshiro256_Rng :=
+     Xoshiro256.Create_Seeded ([others => 0]);
 begin
    for E of Expected loop
       Assert (Gen.Next = E);
    end loop;
+
+   Assert (Gen2.Next /= 0);
+   --  check that a system-seeded generator outputs a random value
+   Assert (Gen3.Next /= 0);
+   --  check that a zero seeds is properly handled
 end Tests.Xoshiro;

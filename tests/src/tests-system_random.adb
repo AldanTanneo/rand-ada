@@ -2,13 +2,19 @@ with Rand_Sys;
 
 procedure Tests.System_Random is
    use Rand.Core;
-   use all type U64;
+   use type U64;
+   use type U8;
 
    R : Rand_Sys.OS_Rng := Rand_Sys.Get;
 
    X : constant U64 := R.Next;
    Y : constant U64 := R.Next;
+
+   Buf : Bytes (1 .. 512);
 begin
    Assert (X /= 0);
    Assert (X /= Y);
+
+   R.Next_Bytes (Buf);
+   Assert (for some B of Buf => B /= 0);
 end Tests.System_Random;
