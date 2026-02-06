@@ -12,9 +12,11 @@ procedure Tests.System_Random is
 
    Buf : Bytes (1 .. 512);
 begin
-   Assert (X /= 0);
-   Assert (X /= Y);
+   Assert (X /= 0, "system randomness should be different from 0");
+   Assert (X /= Y, "system randomness should give distinct elements");
 
    R.Next_Bytes (Buf);
-   Assert (for some B of Buf => B /= 0);
+   Assert
+     ((for some B of Buf => B /= 0),
+      "system randomness should have a non-null byte");
 end Tests.System_Random;

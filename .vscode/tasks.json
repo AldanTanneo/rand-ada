@@ -1,0 +1,29 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"type": "ada",
+			"command": "alr",
+			"args": [
+				"test"
+			],
+			"options": {
+				"env": {
+					"ADAFLAGS": "-gnatef",
+					"ALIRE_TESTS_PATH": "${cwd}/tests/src/"
+				},
+				"cwd": "tests/src",
+			},
+			"problemMatcher": [
+				"$ada-error",
+				"$ada-warning",
+				"$ada-info"
+			],
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			},
+			"label": "ada: Build & test current project",
+		},
+	]
+}

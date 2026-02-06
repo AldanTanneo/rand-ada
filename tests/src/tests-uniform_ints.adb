@@ -18,12 +18,12 @@ procedure Tests.Uniform_Ints is
 begin
    for I in 1 .. 100000 loop
       X := D1.Sample (R);
-      Assert (50 <= X and then X <= 2500);
+      Assert (50 <= X and then X <= 2500, "integer not in required range");
 
       X := D2.Sample (R);
-      Assert (-1000 <= X and then X <= 1000);
+      Assert (-1000 <= X and then X <= 1000, "integer not in required range");
 
       Y := D3.Sample (R);
-      Assert (Y'Valid);
+      Assert (Y'Valid, "invalid I128");
    end loop;
 end Tests.Uniform_Ints;

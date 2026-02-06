@@ -17,12 +17,12 @@ procedure Tests.Uniform_Floats is
 begin
    for I in 1 .. 100000 loop
       X := D1.Sample (R);
-      Assert (50.0 <= X and then X < 2500.0);
+      Assert (50.0 <= X and then X < 2500.0, "float not in required range");
 
       X := D2.Sample (R);
-      Assert (-1000.0 <= X and then X < 1000.0);
+      Assert (-1000.0 <= X and then X < 1000.0, "float not in required range");
 
       Y := D3.Sample (R);
-      Assert (Y'Valid);
+      Assert (Y'Valid, "invalid Long_Float");
    end loop;
 end Tests.Uniform_Floats;

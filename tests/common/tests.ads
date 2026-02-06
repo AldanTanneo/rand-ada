@@ -1,8 +1,4 @@
-pragma Warnings (Off);
-with Ada.Assertions; use Ada.Assertions;
---  Make Assert visible to children
-pragma Warnings (On);
-
+with GNAT.Source_Info;
 with Rand;
 
 package Tests is
@@ -16,4 +12,12 @@ package Tests is
        and then (for all C of Hex_String => Is_Hex (C));
 
    function Parse_Hex_String (S : Hex_String) return Rand.Core.Bytes;
+
+   function To_Hex_String (Buf : Rand.Core.Bytes) return Hex_String;
+
+   procedure Assert
+     (Condition : Boolean;
+      Message   : String := "assertion failed";
+      Source    : String := GNAT.Source_Info.Source_Location);
+   --  custom assertion procedure, with message and source tracing.
 end Tests;

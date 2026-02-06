@@ -40,7 +40,16 @@ begin
            ChaCha.Create_Seeded (Keys (I), ChaCha.ChaCha20);
       begin
          R.Next_Bytes (Buf);
-         Assert (Buf = Expected (I));
+         Assert
+           (Buf = Expected (I),
+            "invalid keystream for key "
+            & To_Hex_String (Keys (I))
+            & ASCII.LF
+            & "expected "
+            & To_Hex_String (Expected (I))
+            & ASCII.LF
+            & "got      "
+            & To_Hex_String (Buf));
       end;
    end loop;
 end Tests.ChaCha20;
