@@ -10,6 +10,8 @@ is
    use Core;
 
    package Interfaces is
+      --  Predefined distribution interfaces for common types
+
       package Bool_Distr is new Generic_Distribution (Boolean);
 
       package Short_Float_Distr is new Generic_Distribution (Short_Float);
