@@ -9,8 +9,9 @@ licenses = "Apache-2.0 WITH LLVM-exception"
 website = "https://github.com/AldanTanneo/rand-ada"
 tags = ["random", "chacha20", "rng", "getrandom", "security"]
 
-[test]
-runner = "alire"
+# Only in alr nightly or 3.0
+# [test]
+# runner = "alire"
 
 [build-switches]
 "*".ada_version = "Ada2022"
