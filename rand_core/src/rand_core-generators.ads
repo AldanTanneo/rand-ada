@@ -14,6 +14,10 @@ is
    --  utility functions for generating standard types
    --
 
+   function Gen (R : in out Rng'Class) return Boolean
+   with Inline_Always;
+   --  Return a Boolean with equal probability
+
    generic
       type F is digits <>;
       type Rg (<>) is limited new Rng with private;
@@ -30,12 +34,38 @@ is
    function Gen (R : in out Rng'Class) return Long_Float
    with Inline_Always;
    --  Return a Long_Float in [0, 1)
+   function Gen (R : in out Rng'Class) return Long_Long_Float
+   with Inline_Always;
+   --  Return a Long_Long_Float in [0, 1)
+
+   generic
+      type I is range <>;
+      type Rg (<>) is limited new Rng with private;
+      pragma
+        Compile_Time_Error
+          (not (I'Size = 8
+                or else I'Size = 16
+                or else I'Size = 32
+                or else I'Size = 64
+                or else I'Size = 128),
+           "unsupported integer size");
+   function Generic_Integer (R : in out Rg) return I
+   with Inline;
+   --  Generic function to generate an integer value over the whole machine
+   --  range. Only supports sizes 8, 16, 32, 64 and 128.
+
    function Gen (R : in out Rng'Class) return Integer
    with Inline_Always;
    --  Return a random Integer over the whole range
    function Gen (R : in out Rng'Class) return Long_Integer
    with Inline_Always;
    --  Return a random Long_Integer over the whole range
+   function Gen (R : in out Rng'Class) return Long_Long_Integer
+   with Inline_Always;
+   --  Return a random Long_Long_Integer over the whole range
+   function Gen (R : in out Rng'Class) return Long_Long_Long_Integer
+   with Inline_Always;
+   --  Return a random Long_Long_Long_Integer over the whole range
 
    function Gen (R : in out Rng'Class) return I8
    with Inline_Always;

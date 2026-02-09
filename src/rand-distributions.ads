@@ -21,6 +21,8 @@ is
       package Long_Int_Distr is new Generic_Distribution (Long_Integer);
       package Long_Long_Int_Distr is new
         Generic_Distribution (Long_Long_Integer);
+      package Long_Long_Long_Int_Distr is new
+        Generic_Distribution (Long_Long_Long_Integer);
 
       package Natural_Distr is new Generic_Distribution (Natural);
       package Positive_Distr is new Generic_Distribution (Positive);

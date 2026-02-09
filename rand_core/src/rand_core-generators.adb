@@ -5,6 +5,10 @@ with Rand_Core.Utils;
 package body Rand_Core.Generators
   with Pure
 is
+   use type I64;
+   function Gen (R : in out Rng'Class) return Boolean
+   is (I64'(R.Gen) < 0);
+
    function Generic_Float (R : in out Rg) return F is
       use type U64;
 
@@ -29,24 +33,47 @@ is
 
    function Gen_Float is new Generic_Float (Float, Rng'Class);
    function Gen_Long_Float is new Generic_Float (Long_Float, Rng'Class);
+   function Gen_Long_Long_Float is new
+     Generic_Float (Long_Long_Float, Rng'Class);
 
    function Gen (R : in out Rng'Class) return Float renames Gen_Float;
    function Gen (R : in out Rng'Class) return Long_Float
    renames Gen_Long_Float;
+   function Gen (R : in out Rng'Class) return Long_Long_Float
+   renames Gen_Long_Long_Float;
 
    function U32_To_Int is new Ada.Unchecked_Conversion (U32, Integer);
    function U64_To_Int is new Ada.Unchecked_Conversion (U64, Long_Integer);
-
-   function Gen (R : in out Rng'Class) return Integer
-   is (U32_To_Int (R.Gen));
-   function Gen (R : in out Rng'Class) return Long_Integer
-   is (U64_To_Int (R.Gen));
 
    function U8_To_I8 is new Ada.Unchecked_Conversion (U8, I8);
    function U16_To_I16 is new Ada.Unchecked_Conversion (U16, I16);
    function U32_To_I32 is new Ada.Unchecked_Conversion (U32, I32);
    function U64_To_I64 is new Ada.Unchecked_Conversion (U64, I64);
    function U128_To_I128 is new Ada.Unchecked_Conversion (U128, I128);
+
+   function Generic_Integer (R : in out Rg) return I
+   is (case I'Size is
+         when 8      => I (I8'(R.Gen)),
+         when 16     => I (I16'(R.Gen)),
+         when 32     => I (I32'(R.Gen)),
+         when 64     => I (I64'(R.Gen)),
+         when 128    => I (I128'(R.Gen)),
+         when others => raise Program_Error with "unsupported integer size");
+
+   function Gen_Int is new Generic_Integer (Integer, Rng'Class);
+   function Gen_Long_Int is new Generic_Integer (Long_Integer, Rng'Class);
+   function Gen_Long_Long_Int is new
+     Generic_Integer (Long_Long_Integer, Rng'Class);
+   function Gen_Long_Long_Long_Int is new
+     Generic_Integer (Long_Long_Long_Integer, Rng'Class);
+
+   function Gen (R : in out Rng'Class) return Integer renames Gen_Int;
+   function Gen (R : in out Rng'Class) return Long_Integer
+   renames Gen_Long_Int;
+   function Gen (R : in out Rng'Class) return Long_Long_Integer
+   renames Gen_Long_Long_Int;
+   function Gen (R : in out Rng'Class) return Long_Long_Long_Integer
+   renames Gen_Long_Long_Long_Int;
 
    function Gen (R : in out Rng'Class) return I8
    is (U8_To_I8 (R.Gen));
