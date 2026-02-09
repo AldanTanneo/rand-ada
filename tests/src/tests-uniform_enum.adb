@@ -11,7 +11,7 @@ procedure Tests.Uniform_Enum is
    U1 : constant T_Uniform.Distribution := T_Uniform.Create;
    U2 : constant T_Uniform.Distribution := T_Uniform.Create (B, E);
 begin
-   for I in 1 .. 100000 loop
+   for I in 1 .. 1000000 loop
       Assert (U1.Sample (R) in T, "invalid enum member");
       Assert (U2.Sample (R) in B .. E, "enum member not in required range");
    end loop;

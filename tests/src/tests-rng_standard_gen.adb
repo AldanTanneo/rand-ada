@@ -21,11 +21,11 @@ procedure Tests.Rng_Standard_Gen is
    U64  : Core.U64;
    U128 : Core.U128;
 begin
-   for X in 1 .. 100000 loop
+   for X in 1 .. 1000000 loop
       F := R.Gen;
-      Assert (F in 0.0 .. 1.0, "Float not in 0..1");
+      Assert (F >= 0.0 and then F < 1.0, "Float not in [0, 1)");
       Lf := R.Gen;
-      Assert (Lf in 0.0 .. 1.0, "Long_Float not in 0..1");
+      Assert (Lf >= 0.0 and then F < 1.0, "Long_Float not in [0, 1)");
 
       I := R.Gen;
       Assert (I'Valid, "invalid Integer");

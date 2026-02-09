@@ -16,7 +16,7 @@ procedure Tests.Uniform_Ints is
    D3 : constant U2 :=
      Distributions.Uniform_I128.Create (I128'First, I128'Last);
 begin
-   for I in 1 .. 100000 loop
+   for I in 1 .. 1000000 loop
       X := D1.Sample (R);
       Assert (50 <= X and then X <= 2500, "integer not in required range");
 

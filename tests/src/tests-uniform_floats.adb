@@ -15,7 +15,7 @@ procedure Tests.Uniform_Floats is
      Distributions.Uniform_Long_Float.Create
        (Long_Float'First / 2.0, Long_Float'Last / 2.0);
 begin
-   for I in 1 .. 100000 loop
+   for I in 1 .. 1000000 loop
       X := D1.Sample (R);
       Assert (50.0 <= X and then X < 2500.0, "float not in required range");
 
