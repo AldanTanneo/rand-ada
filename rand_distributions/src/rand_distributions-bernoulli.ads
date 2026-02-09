@@ -6,23 +6,24 @@ package Rand_Distributions.Bernoulli with Pure is
    overriding
    function Sample
      (D : Distribution; R : in out Generators.Rng'Class) return Boolean;
+   --  Sample a boolean value which is True with probability P
 
    generic
       type Rng (<>) is limited new Generators.Rng with private;
    function Sample_Generic (D : Distribution; R : in out Rng) return Boolean;
+   --  Sample a boolean value which is True with probability P
 
    subtype Probability is Long_Float range 0.0 .. 1.0;
 
    function Create (P : Probability) return Distribution;
+   --  Create a Bernoulli distribution with probability P
 
    function Create
      (Numerator : Natural; Denominator : Positive) return Distribution
    is (Create (Long_Float (Numerator) / Long_Float (Denominator)))
    with Pre => Numerator <= Denominator;
-
-   function Create (P : Float) return Distribution
-   is (Create (Long_Float (P)))
-   with Pre => Long_Float (P) in Probability;
+   --  Create a Bernoulli distribution with probability
+   --  P = Numerator/Denominator
 
 private
    use all type U64;
