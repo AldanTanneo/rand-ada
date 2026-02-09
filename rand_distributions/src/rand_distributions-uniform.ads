@@ -25,6 +25,12 @@ is
       --  Create a uniform distribution over [Low, High). This function can be
       --  expensive, so keep the created value around as much as possible.
 
+      function Create_Inclusive
+        (Low : T := 0.0; High : T := 1.0) return Distribution
+      is (Create (Low, T'Succ (High)))
+      with Pre => Low <= High;
+      --  Create a uniform distribution over [Low, High].
+
    private
       subtype B is T'Base;
 
@@ -49,10 +55,12 @@ is
       generic
          type Rng (<>) is limited new Generators.Rng with private;
       function Sample_Generic (D : Distribution; R : in out Rng) return T;
+      --  Sample a random discrete value in the range [Low, High].
 
       function Create
         (Low : T := T'First; High : T := T'Last) return Distribution
       with Pre => Low <= High;
+      --  Create a uniform distribution over [Low, High].
 
    private
       subtype B is T'Base;
