@@ -55,10 +55,10 @@ is
       Result : State_Array := R.State;
 
       procedure Quarter_Round (I, J, K, L : State_Range) with Inline is
-         A : U32 := Result (I);
-         B : U32 := Result (J);
-         C : U32 := Result (K);
-         D : U32 := Result (L);
+         A : U32 renames Result (I);
+         B : U32 renames Result (J);
+         C : U32 renames Result (K);
+         D : U32 renames Result (L);
       begin
          A := A + B;
          D := Rotl (D xor A, 16);
@@ -71,11 +71,6 @@ is
 
          C := C + D;
          B := Rotl (B xor C, 7);
-
-         Result (I) := A;
-         Result (J) := B;
-         Result (K) := C;
-         Result (L) := D;
       end Quarter_Round;
 
       procedure Double_Round with Inline is

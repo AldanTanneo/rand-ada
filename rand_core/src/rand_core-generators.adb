@@ -42,9 +42,6 @@ is
    function Gen (R : in out Rng'Class) return Long_Long_Float
    renames Gen_Long_Long_Float;
 
-   function U32_To_Int is new Ada.Unchecked_Conversion (U32, Integer);
-   function U64_To_Int is new Ada.Unchecked_Conversion (U64, Long_Integer);
-
    function U8_To_I8 is new Ada.Unchecked_Conversion (U8, I8);
    function U16_To_I16 is new Ada.Unchecked_Conversion (U16, I16);
    function U32_To_I32 is new Ada.Unchecked_Conversion (U32, I32);

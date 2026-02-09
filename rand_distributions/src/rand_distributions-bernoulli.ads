@@ -20,7 +20,6 @@ package Rand_Distributions.Bernoulli with Pure is
 
    function Create
      (Numerator : Natural; Denominator : Positive) return Distribution
-   is (Create (Long_Float (Numerator) / Long_Float (Denominator)))
    with Pre => Numerator <= Denominator;
    --  Create a Bernoulli distribution with probability
    --  P = Numerator/Denominator
@@ -47,5 +46,13 @@ private
    is (Sample_Impl (D, R));
 
    function Create (P : Probability) return Distribution
-   is (if P = 1.0 then (Prob => Always_True) else (Prob => U64 (P * Scale)));
+   is (if P = 1.0
+       then (Prob => Always_True)
+       else (Prob => U64 (Long_Float'Floor (P * Scale))));
+
+   function Create
+     (Numerator : Natural; Denominator : Positive) return Distribution
+   is (if Numerator = Denominator
+       then (Prob => Always_True)
+       else Create (Long_Float (Numerator) / Long_Float (Denominator)));
 end Rand_Distributions.Bernoulli;
