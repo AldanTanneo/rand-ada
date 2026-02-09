@@ -1,6 +1,8 @@
 with Ada.Unchecked_Conversion;
 
-package Rand_Core.Utils is
+package Rand_Core.Utils
+  with Pure
+is
    subtype Bytes4 is Bytes (1 .. 4);
    subtype Bytes8 is Bytes (1 .. 8);
 

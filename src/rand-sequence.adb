@@ -1,7 +1,9 @@
 with Rand_Distributions.Uniform;
 pragma Extensions_Allowed (All_Extensions);
 
-package body Rand.Sequence is
+package body Rand.Sequence
+  with Preelaborate
+is
    procedure Shuffle (S : in out Seq; R : in out Rng) is
       package Distr is new Rand_Distributions.Generic_Distribution (Idx);
       package Uniform is new Rand_Distributions.Uniform.Discrete (Idx, Distr);

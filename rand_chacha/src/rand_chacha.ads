@@ -1,7 +1,9 @@
 with Rand_Core.Generators;
 use Rand_Core;
 
-package Rand_Chacha is
+package Rand_Chacha
+  with Pure
+is
    type ChaCha_Kind is (ChaCha8, ChaCha12, ChaCha20);
    --  Determines the number of rounds in the RNG
    for ChaCha_Kind use (ChaCha8 => 4, ChaCha12 => 6, ChaCha20 => 10);

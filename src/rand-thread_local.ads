@@ -1,7 +1,9 @@
 --  Provides a secure, thread local random generator.
 --  Implementation may be subject to change.
 
-package Rand.Thread_Local is
+package Rand.Thread_Local
+  with Preelaborate
+is
    type Thread_Rng (<>) is new Core_Rng with private;
    --  Handle to the thread local Rng.
 

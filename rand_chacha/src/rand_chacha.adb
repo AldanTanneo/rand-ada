@@ -1,7 +1,9 @@
 with Ada.Unchecked_Conversion;
 with Rand_Core.Utils; use Rand_Core.Utils;
 
-package body Rand_Chacha is
+package body Rand_Chacha
+  with Pure
+is
    use all type U32;
    type Chars4 is array (1 .. 4) of Character;
 
@@ -12,13 +14,13 @@ package body Rand_Chacha is
    is (From_LE_Bytes (Convert (C)))
    with Inline_Always;
 
-   C0 : constant U32 := U32_Bytes ("expa");
-   C1 : constant U32 := U32_Bytes ("nd 3");
-   C2 : constant U32 := U32_Bytes ("2-by");
-   C3 : constant U32 := U32_Bytes ("te k");
-
    function Create_Seeded
-     (Key : Seed_Type; Kind : ChaCha_Kind := ChaCha12) return ChaCha_Rng is
+     (Key : Seed_Type; Kind : ChaCha_Kind := ChaCha12) return ChaCha_Rng
+   is
+      C0 : constant U32 := U32_Bytes ("expa");
+      C1 : constant U32 := U32_Bytes ("nd 3");
+      C2 : constant U32 := U32_Bytes ("2-by");
+      C3 : constant U32 := U32_Bytes ("te k");
    begin
       return R : ChaCha_Rng (Kind) do
          R.State (0 .. 3) := (C0, C1, C2, C3);

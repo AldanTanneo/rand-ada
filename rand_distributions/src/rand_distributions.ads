@@ -1,7 +1,9 @@
 with Rand_Core.Generators;
 use Rand_Core;
 
-package Rand_Distributions is
+package Rand_Distributions
+  with Pure
+is
 
    generic
       type T (<>) is limited private;

@@ -1,4 +1,6 @@
-package Rand_Core.Generators is
+package Rand_Core.Generators
+  with Pure
+is
    type Rng is limited interface;
 
    function Next (R : in out Rng) return U64 is abstract;

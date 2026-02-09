@@ -1,7 +1,9 @@
 with Rand_Core.Utils;
 with Ada.Unchecked_Conversion;
 
-package body Rand_Distributions.Uniform is
+package body Rand_Distributions.Uniform
+  with Pure
+is
 
    package body Floating_Point is
 
@@ -13,8 +15,10 @@ package body Rand_Distributions.Uniform is
       pragma
         Compile_Time_Error (T'Machine_Radix /= 2, "machine radix is not 2");
 
+      use type U64;
+
       Bits_To_Discard : constant Natural := 64 - B'Machine_Mantissa;
-      Msb_Mask        : constant U64 := Utils.Shl (1, B'Machine_Mantissa - 1);
+      Msb_Mask        : constant U64 := 2 ** (B'Machine_Mantissa - 1);
       Max_Rand        : constant B := B'Adjacent (1.0, 0.0);
 
       function Create (Low : T := 0.0; High : T := 1.0) return Distribution is
@@ -64,7 +68,7 @@ package body Rand_Distributions.Uniform is
       use all type U64;
       use all type U128;
 
-      Mask_32 : constant U64 := 2**32 - 1;
+      Mask_32 : constant U64 := 2 ** 32 - 1;
 
       function Sample_Generic (D : Distribution; R : in out Rng) return T is
       begin
@@ -105,7 +109,7 @@ package body Rand_Distributions.Uniform is
 
                Hi, Lo : U64;
             begin
-               if D.Span = 2**64 then
+               if D.Span = 2 ** 64 then
                   return Conv_To_Result (R.Next + Conv_To_Unsigned (D.Low));
                else
                   loop
@@ -116,7 +120,7 @@ package body Rand_Distributions.Uniform is
                   return Conv_To_Result (Hi + Conv_To_Unsigned (D.Low));
                end if;
             end;
-         elsif D.Span = 2**32 then
+         elsif D.Span = 2 ** 32 then
             return T'Val (T'Pos (D.Low) + U32'Pos (U32 (R.Next and Mask_32)));
          else
             declare

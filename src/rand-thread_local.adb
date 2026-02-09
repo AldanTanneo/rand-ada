@@ -1,7 +1,9 @@
 with Rand_Chacha;
 with Rand_Sys;
 
-package body Rand.Thread_Local is
+package body Rand.Thread_Local
+  with Preelaborate
+is
    package ChaCha renames Rand_Chacha;
    subtype ChaCha12_Rng is ChaCha.ChaCha12_Rng;
 

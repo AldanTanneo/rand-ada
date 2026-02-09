@@ -1,7 +1,9 @@
 with Rand_Core.Generators;
 use Rand_Core;
 
-package Rand_Sys is
+package Rand_Sys
+  with Preelaborate
+is
    type OS_Rng is new Generators.Rng with private;
 
    overriding

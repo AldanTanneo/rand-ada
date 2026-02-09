@@ -1,4 +1,6 @@
-package Rand_Distributions.Uniform is
+package Rand_Distributions.Uniform
+  with Pure
+is
 
    generic
       type T is digits <>;

@@ -4,7 +4,9 @@ with Rand_Xoshiro256;
 
 with Rand_Core.Generators;
 
-package Rand is
+package Rand
+  with Preelaborate
+is
    package Core renames Rand_Core;
    package ChaCha renames Rand_Chacha;
    package Xoshiro256 renames Rand_Xoshiro256;

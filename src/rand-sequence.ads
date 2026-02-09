@@ -1,4 +1,6 @@
-package Rand.Sequence is
+package Rand.Sequence
+  with Preelaborate
+is
    generic
       type Idx is (<>);
       type Elt is private;

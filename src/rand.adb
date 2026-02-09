@@ -1,7 +1,9 @@
 with Rand.Thread_Local;
 pragma Elaborate (Rand.Thread_Local);
 
-package body Rand is
+package body Rand
+  with Preelaborate
+is
    function Thread_Rng return Rng
    is (Rand.Thread_Local.Get);
 

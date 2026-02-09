@@ -2,7 +2,9 @@ with Rand_Core.Utils;
 
 with System_Random;
 
-package body Rand_Sys is
+package body Rand_Sys
+  with Preelaborate
+is
 
    function Get return OS_Rng is
       R : OS_Rng;

@@ -2,7 +2,9 @@ with Ada.Unchecked_Conversion;
 
 with Rand_Core.Utils;
 
-package body Rand_Core.Generators is
+package body Rand_Core.Generators
+  with Pure
+is
    function Gen (R : in out Rng'Class) return Float
    is (Float'Compose
          (Float (Utils.Shr (R.Next, 64 - Float'Machine_Mantissa)), 1)

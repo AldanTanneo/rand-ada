@@ -4,7 +4,9 @@ with Rand_Distributions.Bernoulli;
 with Rand_Distributions.Uniform;
 use Rand_Distributions;
 
-package Rand.Distributions is
+package Rand.Distributions
+  with Preelaborate
+is
    use Core;
 
    package Interfaces is

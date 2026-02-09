@@ -1,7 +1,9 @@
 with Ada.Numerics;
 with Rand_Core.Utils;
 
-package body Rand_Xoshiro256 is
+package body Rand_Xoshiro256
+  with Pure
+is
    use all type U64;
 
    overriding
@@ -36,7 +38,7 @@ package body Rand_Xoshiro256 is
    end Next_Bytes;
 
    function Create_Seeded (Seed : Seed_Type) return Xoshiro256_Rng is
-      Fixed : constant U64 := U64 (Ada.Numerics.Pi * Long_Float (2.0**60));
+      Fixed : constant U64 := U64 (Ada.Numerics.Pi * Long_Float (2.0 ** 60));
 
       use all type U8;
    begin

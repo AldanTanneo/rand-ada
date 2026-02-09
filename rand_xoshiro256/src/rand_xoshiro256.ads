@@ -1,7 +1,9 @@
 with Rand_Core.Generators;
 use Rand_Core;
 
-package Rand_Xoshiro256 is
+package Rand_Xoshiro256
+  with Pure
+is
    type Xoshiro256_Rng (<>) is limited new Generators.Rng with private;
 
    overriding

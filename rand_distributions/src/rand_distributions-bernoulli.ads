@@ -1,6 +1,6 @@
 generic
    with package D is new Generic_Distribution (Boolean);
-package Rand_Distributions.Bernoulli is
+package Rand_Distributions.Bernoulli with Pure is
    type Distribution is new D.Distribution with private;
 
    overriding
@@ -32,7 +32,7 @@ private
    end record;
 
    Always_True : constant := U64'Last;
-   Scale       : constant := 2.0**64;
+   Scale       : constant := 2.0 ** 64;
 
    function Sample_Generic (D : Distribution; R : in out Rng) return Boolean
    is (D.Prob = Always_True or else R.Next < D.Prob);
