@@ -5,7 +5,7 @@ with Rand_Core.Utils;
 package body Rand_Core.Generators
   with Pure
 is
-   function Generic_Float (R : in out Rng'Class) return F is
+   function Generic_Float (R : in out Rg) return F is
       use type U64;
 
       Bits_To_Discard : constant Natural := 64 - F'Machine_Mantissa;
@@ -27,8 +27,8 @@ is
       return Value_0_1;
    end Generic_Float;
 
-   function Gen_Float is new Generic_Float (Float);
-   function Gen_Long_Float is new Generic_Float (Long_Float);
+   function Gen_Float is new Generic_Float (Float, Rng'Class);
+   function Gen_Long_Float is new Generic_Float (Long_Float, Rng'Class);
 
    function Gen (R : in out Rng'Class) return Float renames Gen_Float;
    function Gen (R : in out Rng'Class) return Long_Float
