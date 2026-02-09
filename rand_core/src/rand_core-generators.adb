@@ -31,11 +31,14 @@ is
       return Value_0_1;
    end Generic_Float;
 
+   function Gen_Short_Float is new Generic_Float (Short_Float, Rng'Class);
    function Gen_Float is new Generic_Float (Float, Rng'Class);
    function Gen_Long_Float is new Generic_Float (Long_Float, Rng'Class);
    function Gen_Long_Long_Float is new
      Generic_Float (Long_Long_Float, Rng'Class);
 
+   function Gen (R : in out Rng'Class) return Short_Float
+   renames Gen_Short_Float;
    function Gen (R : in out Rng'Class) return Float renames Gen_Float;
    function Gen (R : in out Rng'Class) return Long_Float
    renames Gen_Long_Float;
@@ -57,6 +60,9 @@ is
          when 128    => I (I128'(R.Gen)),
          when others => raise Program_Error with "unsupported integer size");
 
+   function Gen_Short_Short_Int is new
+     Generic_Integer (Short_Short_Integer, Rng'Class);
+   function Gen_Short_Int is new Generic_Integer (Short_Integer, Rng'Class);
    function Gen_Int is new Generic_Integer (Integer, Rng'Class);
    function Gen_Long_Int is new Generic_Integer (Long_Integer, Rng'Class);
    function Gen_Long_Long_Int is new
@@ -64,6 +70,10 @@ is
    function Gen_Long_Long_Long_Int is new
      Generic_Integer (Long_Long_Long_Integer, Rng'Class);
 
+   function Gen (R : in out Rng'Class) return Short_Short_Integer
+   renames Gen_Short_Short_Int;
+   function Gen (R : in out Rng'Class) return Short_Integer
+   renames Gen_Short_Int;
    function Gen (R : in out Rng'Class) return Integer renames Gen_Int;
    function Gen (R : in out Rng'Class) return Long_Integer
    renames Gen_Long_Int;

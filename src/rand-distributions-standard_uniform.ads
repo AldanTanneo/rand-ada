@@ -1,9 +1,12 @@
 package Rand.Distributions.Standard_Uniform is
    type Distribution is
      new Bool_Distr.Distribution
+     and Short_Float_Distr.Distribution
      and Float_Distr.Distribution
      and Long_Float_Distr.Distribution
      and Long_Long_Float_Distr.Distribution
+     and Short_Short_Int_Distr.Distribution
+     and Short_Int_Distr.Distribution
      and Int_Distr.Distribution
      and Long_Int_Distr.Distribution
      and Long_Long_Int_Distr.Distribution
@@ -25,6 +28,10 @@ package Rand.Distributions.Standard_Uniform is
    is (R.Gen)
    with Inline;
    overriding
+   function Sample (D : Distribution; R : in out Rng) return Short_Float
+   is (R.Gen)
+   with Inline;
+   overriding
    function Sample (D : Distribution; R : in out Rng) return Float
    is (R.Gen)
    with Inline;
@@ -34,6 +41,15 @@ package Rand.Distributions.Standard_Uniform is
    with Inline;
    overriding
    function Sample (D : Distribution; R : in out Rng) return Long_Long_Float
+   is (R.Gen)
+   with Inline;
+   overriding
+   function Sample
+     (D : Distribution; R : in out Rng) return Short_Short_Integer
+   is (R.Gen)
+   with Inline;
+   overriding
+   function Sample (D : Distribution; R : in out Rng) return Short_Integer
    is (R.Gen)
    with Inline;
    overriding

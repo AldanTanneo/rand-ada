@@ -12,11 +12,15 @@ is
    package Interfaces is
       package Bool_Distr is new Generic_Distribution (Boolean);
 
+      package Short_Float_Distr is new Generic_Distribution (Short_Float);
       package Float_Distr is new Generic_Distribution (Float);
       package Long_Float_Distr is new Generic_Distribution (Long_Float);
       package Long_Long_Float_Distr is new
         Generic_Distribution (Long_Long_Float);
 
+      package Short_Short_Int_Distr is new
+        Generic_Distribution (Short_Short_Integer);
+      package Short_Int_Distr is new Generic_Distribution (Short_Integer);
       package Int_Distr is new Generic_Distribution (Integer);
       package Long_Int_Distr is new Generic_Distribution (Long_Integer);
       package Long_Long_Int_Distr is new

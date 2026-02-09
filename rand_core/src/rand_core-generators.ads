@@ -28,6 +28,9 @@ is
    with Inline;
    --  Generic function to generate a floating point value in the range [0, 1)
 
+   function Gen (R : in out Rng'Class) return Short_Float
+   with Inline_Always;
+   --  Return a Short_Float in [0, 1)
    function Gen (R : in out Rng'Class) return Float
    with Inline_Always;
    --  Return a Float in [0, 1)
@@ -54,6 +57,12 @@ is
    --  Generic function to generate an integer value over the whole machine
    --  range. Only supports sizes 8, 16, 32, 64 and 128.
 
+   function Gen (R : in out Rng'Class) return Short_Short_Integer
+   with Inline_Always;
+   --  Return a random Short_Short_Integer over the whole range
+   function Gen (R : in out Rng'Class) return Short_Integer
+   with Inline_Always;
+   --  Return a random Short_Integer over the whole range
    function Gen (R : in out Rng'Class) return Integer
    with Inline_Always;
    --  Return a random Integer over the whole range

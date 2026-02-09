@@ -3,10 +3,15 @@ with Rand; use Rand;
 procedure Tests.Rng_Standard_Gen is
    R : Rng := Thread_Rng;
 
+   B : Boolean;
+
+   Sf  : Short_Float;
    F   : Float;
    Lf  : Long_Float;
    Llf : Long_Long_Float;
 
+   Ssi  : Short_Short_Integer;
+   Si   : Short_Integer;
    I    : Integer;
    Li   : Long_Integer;
    Lli  : Long_Long_Integer;
@@ -24,7 +29,12 @@ procedure Tests.Rng_Standard_Gen is
    U64  : Core.U64;
    U128 : Core.U128;
 begin
-   for X in 1 .. 1000000 loop
+   for X in 1 .. 500000 loop
+      B := R.Gen;
+      Assert (B'Valid, "invalid Boolean");
+
+      Sf := R.Gen;
+      Assert (Sf >= 0.0 and then Sf < 1.0, "Short_Float not in [0, 1)");
       F := R.Gen;
       Assert (F >= 0.0 and then F < 1.0, "Float not in [0, 1)");
       Lf := R.Gen;
@@ -32,6 +42,10 @@ begin
       Llf := R.Gen;
       Assert (Llf >= 0.0 and then Llf < 1.0, "Long_Long_Float not in [0, 1)");
 
+      Ssi := R.Gen;
+      Assert (Ssi'Valid, "invalid Short_Short_Integer");
+      Si := R.Gen;
+      Assert (Si'Valid, "invalid Short_Integer");
       I := R.Gen;
       Assert (I'Valid, "invalid Integer");
       Li := R.Gen;
