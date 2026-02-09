@@ -45,9 +45,11 @@ is
          --  a mantissa that is always the same size
 
          Value_1_2 : constant B := B'Compose (B (Mantissa), 1);
+         pragma Assert (Value_1_2 >= 1.0 and then Value_1_2 < 2.0);
          --  set the exponent to 1 in the canonical representation, getting a
          --  value uniformly sampled from [1, 2)
          Value_0_1 : constant B := Value_1_2 - 1.0;
+         pragma Assert (Value_0_1 >= 0.0 and then Value_0_1 < 1.0);
          --  substract 1 to get a value in [0, 1)
       begin
          return T (Value_0_1 * D.Scale + D.Offset);
