@@ -27,10 +27,6 @@ begin
    Avg1 := Long_Float (Sum1) / Long_Float (N);
    Avg2 := Long_Float (Sum2) / Long_Float (N);
 
-   Assert
-     (Avg1 - P in -Epsilon .. Epsilon,
-      "average #1 too far from P: " & Avg1'Img);
-   Assert
-     (Avg2 - P in -Epsilon .. Epsilon,
-      "average #2 too far from P: " & Avg2'Img);
+   Assert (abs (Avg1 - P) < Epsilon, "average #1 too far from P: " & Avg1'Img);
+   Assert (abs (Avg2 - P) < Epsilon, "average #2 too far from P: " & Avg2'Img);
 end Tests.Coin_Flip;
