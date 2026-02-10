@@ -1,4 +1,6 @@
 with Rand_Chacha;
+with Rand_Distributions.Instances;
+with Rand_Distributions.Standard_Uniform;
 with Rand_Sys;
 with Rand_Xoshiro256;
 
@@ -8,6 +10,9 @@ package Rand
   with Preelaborate
 is
    package Core renames Rand_Core;
+   package Distributions renames Rand_Distributions.Instances;
+   package Standard_Uniform renames Rand_Distributions.Standard_Uniform;
+
    package ChaCha renames Rand_Chacha;
    package Xoshiro256 renames Rand_Xoshiro256;
    package Sys renames Rand_Sys;

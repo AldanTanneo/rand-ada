@@ -1,5 +1,4 @@
-with Rand.Distributions;
-use Rand;
+with Rand; use Rand;
 
 procedure Tests.Uniform_Floats is
    R : Rng := Thread_Rng;

@@ -47,7 +47,7 @@ D1 : Uniform_Nat.Distribution := Uniform_Nat.Create (8, 27);
 S : Natural := D1.Sample (R);
    --  sample in the inclusive range [8, 27]
 
-D2 : Bernoulli := Bernoulli.Create (0.25);
+D2 : Bernoulli.Distribution := Bernoulli.Create (0.25);
 S : Boolean := D2.Sample (R);
    --  a boolean that is True 25% of the time
 ```
@@ -57,12 +57,13 @@ Or define your own distributions:
 ```ada
 use Rand.Distributions;
 
-type Gaussian is new Long_Float_Distr.Distribution with record
-   Sigma : Long_Float;
+type Gaussian is new Interfaces.Float_Distr.Distribution
+with record
+   Sigma, Mu : Float;
 end record;
 
 overriding
-function Sample (D : Gaussian; R : in out Rand.Rng) return Long_Float
+function Sample (D : Gaussian; R : in out Rand.Rng) return Float
 is (...); --  sampling the custom distribution
 ```
 

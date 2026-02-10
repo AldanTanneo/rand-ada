@@ -1,5 +1,4 @@
-with Rand.Distributions;
-use Rand;
+with Rand; use Rand;
 
 procedure Tests.Coin_Flip is
    R1 : Rng := Thread_Rng;
