@@ -1,3 +1,6 @@
+[![CI](https://github.com/AldanTanneo/rand-ada/actions/workflows/main.yml/badge.svg)](https://github.com/AldanTanneo/rand-ada/actions/workflows/main.yml)
+[![Alire](https://img.shields.io/endpoint?url=https://alire.ada.dev/badges/rand.json)](https://alire.ada.dev/crates/rand)
+
 # Random number generation toolkit for Ada
 
 Design principles mostly inspired by the [rand](https://github.com/rust-random/rand) Rust crate.
