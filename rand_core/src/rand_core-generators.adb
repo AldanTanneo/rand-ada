@@ -5,6 +5,27 @@ with Rand_Core.Utils;
 package body Rand_Core.Generators
   with Pure
 is
+   function Generic_Next (R : in out Rg) return U64 is
+      Buf : Utils.Bytes8;
+   begin
+      R.Next_Bytes (Buf);
+      return Utils.From_LE_Bytes (Buf);
+   end Generic_Next;
+
+   procedure Generic_Next_Bytes (R : in out Rg; Buf : out Bytes) is
+      Chunks : constant Natural := Buf'Length / 8;
+      Extra  : constant Natural := Buf'Length mod 8;
+   begin
+      for I in 1 .. Chunks loop
+         Buf (Buf'First + 8 * (I - 1) .. Buf'First + 8 * I - 1) :=
+           Utils.To_LE_Bytes (R.Next);
+      end loop;
+      if Extra /= 0 then
+         Buf (Buf'First + 8 * Chunks .. Buf'Last) :=
+           Utils.To_LE_Bytes (R.Next) (1 .. Extra);
+      end if;
+   end Generic_Next_Bytes;
+
    use type I64;
    function Gen (R : in out Rng'Class) return Boolean
    is (I64'(R.Gen) < 0);

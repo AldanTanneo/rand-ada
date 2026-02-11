@@ -32,11 +32,7 @@ is
       end if;
    end Next_Bytes;
 
-   function Next (R : in out OS_Rng) return U64 is
-      Buf : Utils.Bytes8;
-   begin
-      Next_Bytes (R, Buf);
-      return Utils.From_NE_Bytes (Buf);
-   end Next;
+   function Next_Impl is new Generators.Generic_Next (OS_Rng);
+   function Next (R : in out OS_Rng) return U64 renames Next_Impl;
 
 end Rand_Sys;

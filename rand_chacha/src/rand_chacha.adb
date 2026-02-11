@@ -125,10 +125,6 @@ is
       end loop;
    end Next_Bytes;
 
-   function Next (R : in out ChaCha_Rng) return U64 is
-      Buf : Bytes8;
-   begin
-      R.Next_Bytes (Buf);
-      return From_LE_Bytes (Buf);
-   end Next;
+   function Next_Impl is new Generators.Generic_Next (ChaCha_Rng);
+   function Next (R : in out ChaCha_Rng) return U64 renames Next_Impl;
 end Rand_Chacha;

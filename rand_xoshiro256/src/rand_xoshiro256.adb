@@ -6,7 +6,6 @@ package body Rand_Xoshiro256
 is
    use all type U64;
 
-   overriding
    function Next (R : in out Xoshiro256_Rng) return U64 is
       Res : constant U64 := Utils.Rotl (R.S0 + R.S3, 23) + R.S0;
       T   : constant U64 := Utils.Shl (R.S1, 17);
@@ -22,20 +21,10 @@ is
       return Res;
    end Next;
 
-   overriding
-   procedure Next_Bytes (R : in out Xoshiro256_Rng; Buf : out Bytes) is
-      Chunks : constant Natural := Buf'Length / 8;
-      Extra  : constant Natural := Buf'Length mod 8;
-   begin
-      for I in 1 .. Chunks loop
-         Buf (Buf'First + 8 * (I - 1) .. Buf'First + 8 * I - 1) :=
-           Utils.To_LE_Bytes (R.Next);
-      end loop;
-      if Extra /= 0 then
-         Buf (Buf'First + 8 * Chunks .. Buf'Last) :=
-           Utils.To_LE_Bytes (R.Next) (1 .. Extra);
-      end if;
-   end Next_Bytes;
+   procedure Next_Bytes_Impl is new
+     Generators.Generic_Next_Bytes (Xoshiro256_Rng);
+   procedure Next_Bytes (R : in out Xoshiro256_Rng; Buf : out Bytes)
+   renames Next_Bytes_Impl;
 
    function Create_Seeded (Seed : Seed_Type) return Xoshiro256_Rng is
       Fixed : constant U64 := U64 (Ada.Numerics.Pi * Long_Float (2.0 ** 60));
