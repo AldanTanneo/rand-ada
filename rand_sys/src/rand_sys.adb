@@ -17,14 +17,14 @@ is
    procedure Next_Bytes (R : in out OS_Rng; Buf : out Bytes) is
       Max_Len : constant := 256;
 
-      Res  : aliased Bytes := (1 .. 256 => 0);
+      Res  : aliased Bytes := (1 .. Max_Len => 0);
       Full : constant Natural := Buf'Length / Max_Len;
       Curr : Natural := Buf'First - 1;
    begin
       for I in 1 .. Full loop
          System_Rng.Random (Res);
          Buf (Curr + 1 .. Curr + Max_Len) := Res;
-         Curr := Curr + 256;
+         Curr := Curr + Max_Len;
       end loop;
       if Curr < Buf'Last then
          System_Rng.Random (Res);

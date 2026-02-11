@@ -17,18 +17,21 @@ is
    subtype ChaCha20_Rng is ChaCha_Rng (ChaCha20);
 
    overriding
-   function Next (R : in out ChaCha_Rng) return U64;
+   function Next (R : in out ChaCha_Rng) return U64
+   with Inline;
 
    overriding
    procedure Next_Bytes (R : in out ChaCha_Rng; Buf : out Bytes);
 
    subtype Seed_Type is Bytes (1 .. 32);
    function Create_Seeded
-     (Key : Seed_Type; Kind : ChaCha_Kind := ChaCha12) return ChaCha_Rng;
+     (Key : Seed_Type; Kind : ChaCha_Kind := ChaCha12) return ChaCha_Rng
+   with Inline;
 
    function From_Rng
      (R : in out Generators.Rng'Class; Kind : ChaCha_Kind := ChaCha12)
-      return ChaCha_Rng;
+      return ChaCha_Rng
+   with Inline;
 
 private
    subtype State_Range is Natural range 0 .. 15;

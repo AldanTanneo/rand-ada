@@ -14,6 +14,9 @@ is
       --  supports x86 extended precision (64 bits mantissa)
       pragma
         Compile_Time_Error (T'Machine_Radix /= 2, "machine radix is not 2");
+      pragma
+        Compile_Time_Error
+          (Standard'Fast_Math, "fast math not allowed for this package");
 
       use type U64;
 
@@ -37,22 +40,12 @@ is
          return (Offset => Low, Scale => Scale);
       end Create;
 
-      function Sample_Generic (D : Distribution; R : in out Rng) return T is
-         use all type U64;
-         Mantissa : constant U64 :=
-           Utils.Shr (R.Next, Bits_To_Discard) or Msb_Mask;
-         --  shift out the non significant bits + 1, and add a `1` MSB to get
-         --  a mantissa that is always the same size
 
-         Value_1_2 : constant B := B'Compose (B (Mantissa), 1);
-         pragma Assert (Value_1_2 >= 1.0 and then Value_1_2 < 2.0);
-         --  set the exponent to 1 in the canonical representation, getting a
-         --  value uniformly sampled from [1, 2)
-         Value_0_1 : constant B := Value_1_2 - 1.0;
-         pragma Assert (Value_0_1 >= 0.0 and then Value_0_1 < 1.0);
-         --  substract 1 to get a value in [0, 1)
+      function Sample_Generic (D : Distribution; R : in out Rng) return T is
+         function Get_0_1 is new Generators.Generic_Float (B, Rng);
+         pragma Inline_Always (Get_0_1);
       begin
-         return T (Value_0_1 * D.Scale + D.Offset);
+         return T (Get_0_1 (R) * D.Scale + D.Offset);
       end Sample_Generic;
 
       function Sample_Impl is new Sample_Generic (Generators.Rng'Class);

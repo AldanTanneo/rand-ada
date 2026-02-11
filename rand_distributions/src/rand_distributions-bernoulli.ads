@@ -5,7 +5,8 @@ package Rand_Distributions.Bernoulli with Pure is
 
    overriding
    function Sample
-     (D : Distribution; R : in out Generators.Rng'Class) return Boolean;
+     (D : Distribution; R : in out Generators.Rng'Class) return Boolean
+   with Inline;
    --  Sample a boolean value which is True with probability P
 
    generic
@@ -15,12 +16,13 @@ package Rand_Distributions.Bernoulli with Pure is
 
    subtype Probability is Long_Float range 0.0 .. 1.0;
 
-   function Create (P : Probability) return Distribution;
+   function Create (P : Probability) return Distribution
+   with Inline;
    --  Create a Bernoulli distribution with probability P
 
    function Create
      (Numerator : Natural; Denominator : Positive) return Distribution
-   with Pre => Numerator <= Denominator;
+   with Pre => Numerator <= Denominator, Inline;
    --  Create a Bernoulli distribution with probability
    --  P = Numerator/Denominator
 

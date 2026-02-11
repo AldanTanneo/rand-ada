@@ -10,7 +10,8 @@ is
 
       overriding
       function Sample
-        (D : Distribution; R : in out Generators.Rng'Class) return T;
+        (D : Distribution; R : in out Generators.Rng'Class) return T
+      with Inline;
       --  Sample a random floating point value in the range of the
       --  distribution
 
@@ -21,14 +22,14 @@ is
       --  distribution
 
       function Create (Low : T := 0.0; High : T := 1.0) return Distribution
-      with Pre => Low < High;
+      with Pre => Low < High, Inline;
       --  Create a uniform distribution over [Low, High). This function can be
       --  expensive, so keep the created value around as much as possible.
 
       function Create_Inclusive
         (Low : T := 0.0; High : T := 1.0) return Distribution
       is (Create (Low, T'Succ (High)))
-      with Pre => Low <= High;
+      with Pre => Low <= High, Inline;
       --  Create a uniform distribution over [Low, High].
 
    private
@@ -48,7 +49,8 @@ is
 
       overriding
       function Sample
-        (D : Distribution; R : in out Generators.Rng'Class) return T;
+        (D : Distribution; R : in out Generators.Rng'Class) return T
+      with Inline;
       --  Sample a random discrete value in the range [Low, High] (inclusive
       --  on both ends)
 
@@ -59,7 +61,7 @@ is
 
       function Create
         (Low : T := T'First; High : T := T'Last) return Distribution
-      with Pre => Low <= High;
+      with Pre => Low <= High, Inline;
       --  Create a uniform distribution over [Low, High].
 
    private
