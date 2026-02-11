@@ -1,6 +1,7 @@
 --  Instantiations of distributions for various common types
 
 with Rand_Distributions.Bernoulli;
+with Rand_Distributions.Normal;
 with Rand_Distributions.Uniform;
 
 package Rand_Distributions.Instances
@@ -48,6 +49,11 @@ is
    --  distributions for common types
 
    package Bernoulli is new Rand_Distributions.Bernoulli (Bool_Distr);
+   package Normal_Short_Float is new Normal (Short_Float, Short_Float_Distr);
+   package Normal_Float is new Normal (Float, Float_Distr);
+   package Normal_Long_Float is new Normal (Long_Float, Long_Float_Distr);
+   package Normal_Long_Long_Float is new
+     Normal (Long_Long_Float, Long_Long_Float_Distr);
 
    package Uniform_Float is new Uniform.Floating_Point (Float, Float_Distr);
    package Uniform_Long_Float is new
