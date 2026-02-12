@@ -42,10 +42,9 @@ private
    function Sample_Impl is new Sample_Generic (Generators.Rng'Class);
    pragma Inline_Always (Sample_Impl);
 
-   overriding
    function Sample
      (D : Distribution; R : in out Generators.Rng'Class) return Boolean
-   is (Sample_Impl (D, R));
+   renames Sample_Impl;
 
    function Create (P : Probability) return Distribution
    is (if P = 1.0

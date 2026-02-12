@@ -49,13 +49,11 @@ is
       end Sample_Generic;
 
       function Sample_Impl is new Sample_Generic (Generators.Rng'Class);
-      pragma Inline_Always (Sample_Impl);
+      pragma Inline (Sample_Impl);
 
-      overriding
       function Sample
         (D : Distribution; R : in out Generators.Rng'Class) return T
-      is (Sample_Impl (D, R));
-
+      renames Sample_Impl;
    end Floating_Point;
 
    package body Discrete is
@@ -133,11 +131,11 @@ is
       end Sample_Generic;
 
       function Sample_Impl is new Sample_Generic (Generators.Rng'Class);
-      pragma Inline_Always (Sample_Impl);
+      pragma Inline (Sample_Impl);
 
       function Sample
         (D : Distribution; R : in out Generators.Rng'Class) return T
-      is (Sample_Impl (D, R));
+      renames Sample_Impl;
 
       function Create
         (Low : T := T'First; High : T := T'Last) return Distribution
