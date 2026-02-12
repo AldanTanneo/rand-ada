@@ -1,9 +1,7 @@
-with Ada.Numerics.Generic_Elementary_Functions;
 
 package body Rand_Distributions.Normal
   with Pure
 is
-   package GEF is new Ada.Numerics.Generic_Elementary_Functions (T);
 
    function Sample_Generic (D : Distribution; R : in out Rng) return T is
       function Gen_T is new Generators.Generic_Float (T, Rng);
@@ -17,7 +15,7 @@ is
          S := X ** 2 + Y ** 2;
          exit when S < 1.0 and S > 0.0;
       end loop;
-      S := GEF.Sqrt (-2.0 * GEF.Log (S) / S);
+      S := Elementary_Functions.Sqrt (-2.0 * Elementary_Functions.Log (S) / S);
       return D.Mean + D.Stddev * Y * S;
    end Sample_Generic;
 

@@ -1,6 +1,10 @@
+with Ada.Numerics.Generic_Elementary_Functions;
+
 generic
    type T is digits <>;
    with package D is new Generic_Distribution (T);
+   with package Elementary_Functions is new
+     Ada.Numerics.Generic_Elementary_Functions (T);
 package Rand_Distributions.Normal with Pure is
    type Distribution is new D.Distribution with private;
 
