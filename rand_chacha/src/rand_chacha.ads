@@ -57,7 +57,8 @@ private
    subtype State_Byte_Range is Positive range 1 .. 64;
    subtype State_Bytes is Bytes (State_Byte_Range);
 
-   type ChaCha_Rng (Kind : ChaCha_Kind) is limited new Generators.Rng
+   type ChaCha_Rng (Kind : ChaCha_Kind := ChaCha12) is limited
+     new Generators.Rng
    with record
       State : State_Array;
 
