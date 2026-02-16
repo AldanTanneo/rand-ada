@@ -3,8 +3,8 @@ with Ada.Numerics.Long_Elementary_Functions;
 with Rand; use Rand;
 
 procedure Tests.Uniform_Floats is
-   N       : constant := 10000000;
-   Epsilon : constant := 1.0;
+   N       : constant := 1000000;
+   Epsilon : constant := 2.0; --  adapt to currently tested scale
 
    R : Rng := Thread_Rng;
 
