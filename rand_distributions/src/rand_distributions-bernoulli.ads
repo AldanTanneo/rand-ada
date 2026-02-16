@@ -1,3 +1,9 @@
+--  Generic Bernoulli distribution that samples a boolean according to a
+--  fixed probability.
+--
+--  See the `Instances` package for a preinstantiated definition of this
+--  distribution.
+
 generic
    with package D is new Generic_Distribution (Boolean);
 package Rand_Distributions.Bernoulli with Pure is

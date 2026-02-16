@@ -1,3 +1,7 @@
+--  The Standard_Uniform distribution is a convenience distribution that
+--  samples many standard discrete types uniformly, and several floating point
+--  types over the [0, 1) interval.
+
 with Rand_Distributions.Instances;
 
 package Rand_Distributions.Standard_Uniform

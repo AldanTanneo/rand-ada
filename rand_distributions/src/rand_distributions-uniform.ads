@@ -1,3 +1,9 @@
+--  Generic implementations of a uniform sampling distribution.
+--
+--  There are two implementations, one for a discrete type, and one for a
+--  floating point type. See the `Instances` package for several
+--  preinstantiations for common types.
+
 package Rand_Distributions.Uniform
   with Pure
 is

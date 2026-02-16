@@ -1,3 +1,7 @@
+--  A generic normal distribution on floating point values.
+--  See the `Instances` package for several preinstantiated definitions over
+--  standard floating point types.
+
 with Ada.Numerics.Generic_Elementary_Functions;
 
 generic
@@ -11,6 +15,7 @@ package Rand_Distributions.Normal with Pure is
    overriding
    function Sample (D : Distribution; R : in out Generators.Rng'Class) return T
    with Inline;
+   --  Sample a value according to the normal distribution N (μ, σ**2)
 
    generic
       type Rng (<>) is limited new Generators.Rng with private;
@@ -18,6 +23,8 @@ package Rand_Distributions.Normal with Pure is
 
    function Create (Mean : T := 0.0; Stddev : T := 1.0) return Distribution
    with Inline;
+   --  Create a normal distribution with the given mean and standard deviation
+   --  N (μ, σ**2)
 private
    type Distribution is new D.Distribution with record
       Mean   : T := 0.0;
