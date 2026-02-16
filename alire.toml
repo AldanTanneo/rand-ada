@@ -12,9 +12,6 @@ tags = ["random", "chacha20", "rng", "getrandom", "security"]
 [test]
 runner = "alire"
 
-[build-switches]
-"*".ada_version = "Ada2022"
-
 [[depends-on]]
 rand_chacha = "~0.1.0"
 rand_core = "~0.1.0"
