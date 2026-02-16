@@ -33,13 +33,20 @@ is
 
    function From_NE_Bytes is new
      Ada.Unchecked_Conversion (Source => Bytes4, Target => U32);
+   pragma Inline (From_NE_Bytes);
    --  Get the unsigned integer represented by the input bytes, in
    --  the native endianness order.
 
    function To_NE_Bytes is new
      Ada.Unchecked_Conversion (Source => U32, Target => Bytes4);
+   pragma Inline (To_NE_Bytes);
    --  Get the bytes representing the given unsigned integer, in
    --  the native endianness order.
+
+   function Swap_Bytes (X : U32) return U32
+   with Inline;
+   --  Swap the bytes of the given unsigned integer. Equivalent to
+   --  `From_LE_Bytes (To_BE_Bytes (X))`.
 
    function Shl (X : U32; Amnt : Natural) return U32
    renames Interfaces.Shift_Left;
@@ -85,13 +92,20 @@ is
 
    function From_NE_Bytes is new
      Ada.Unchecked_Conversion (Source => Bytes8, Target => U64);
+   pragma Inline (From_NE_Bytes);
    --  Get the unsigned integer represented by the input bytes, in
    --  the native endianness order.
 
    function To_NE_Bytes is new
      Ada.Unchecked_Conversion (Source => U64, Target => Bytes8);
+   pragma Inline (To_NE_Bytes);
    --  Get the bytes representing the given unsigned integer, in
    --  the native endianness order.
+
+   function Swap_Bytes (X : U64) return U64
+   with Inline;
+   --  Swap the bytes of the given unsigned integer. Equivalent to
+   --  `From_LE_Bytes (To_BE_Bytes (X))`.
 
    function Shl (X : U64; Amnt : Natural) return U64
    renames Interfaces.Shift_Left;
@@ -137,13 +151,20 @@ is
 
    function From_NE_Bytes is new
      Ada.Unchecked_Conversion (Source => Bytes16, Target => U128);
+   pragma Inline (From_NE_Bytes);
    --  Get the unsigned integer represented by the input bytes, in
    --  the native endianness order.
 
    function To_NE_Bytes is new
      Ada.Unchecked_Conversion (Source => U128, Target => Bytes16);
+   pragma Inline (To_NE_Bytes);
    --  Get the bytes representing the given unsigned integer, in
    --  the native endianness order.
+
+   function Swap_Bytes (X : U128) return U128
+   with Inline;
+   --  Swap the bytes of the given unsigned integer. Equivalent to
+   --  `From_LE_Bytes (To_BE_Bytes (X))`.
 
    function Shl (X : U128; Amnt : Natural) return U128
    renames Interfaces.Shift_Left;
