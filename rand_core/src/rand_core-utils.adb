@@ -1,13 +1,13 @@
-with GNAT.Byte_Swapping;
-with System;
+pragma Warnings (Off, """System.Byte_Swapping"" is an internal GNAT unit");
+with System.Byte_Swapping;
+pragma Warnings (On, """System.Byte_Swapping"" is an internal GNAT unit");
 
 package body Rand_Core.Utils
   with Pure
 is
    use all type U32;
-   use all type U128;
 
-   function Swap is new GNAT.Byte_Swapping.Swapped4 (U32);
+   function Swap (X : U32) return U32 renames System.Byte_Swapping.Bswap_32;
 
    function From_LE_Bytes (Buf : Bytes4) return U32
    is (case System.Default_Bit_Order is
@@ -31,7 +31,7 @@ is
 
    use all type U64;
 
-   function Swap is new GNAT.Byte_Swapping.Swapped8 (U64);
+   function Swap (X : U64) return U64 renames System.Byte_Swapping.Bswap_64;
 
    function From_LE_Bytes (Buf : Bytes8) return U64
    is (case System.Default_Bit_Order is
@@ -49,6 +49,30 @@ is
          when System.Low_Order_First  => Swap (From_NE_Bytes (Buf)));
 
    function To_BE_Bytes (X : U64) return Bytes8
+   is (case System.Default_Bit_Order is
+         when System.High_Order_First => To_NE_Bytes (X),
+         when System.Low_Order_First  => To_NE_Bytes (Swap (X)));
+
+   use all type U128;
+
+   function Swap (X : U128) return U128 renames System.Byte_Swapping.Bswap_128;
+
+   function From_LE_Bytes (Buf : Bytes16) return U128
+   is (case System.Default_Bit_Order is
+         when System.Low_Order_First  => From_NE_Bytes (Buf),
+         when System.High_Order_First => Swap (From_NE_Bytes (Buf)));
+
+   function To_LE_Bytes (X : U128) return Bytes16
+   is (case System.Default_Bit_Order is
+         when System.Low_Order_First  => To_NE_Bytes (X),
+         when System.High_Order_First => To_NE_Bytes (Swap (X)));
+
+   function From_BE_Bytes (Buf : Bytes16) return U128
+   is (case System.Default_Bit_Order is
+         when System.High_Order_First => From_NE_Bytes (Buf),
+         when System.Low_Order_First  => Swap (From_NE_Bytes (Buf)));
+
+   function To_BE_Bytes (X : U128) return Bytes16
    is (case System.Default_Bit_Order is
          when System.High_Order_First => To_NE_Bytes (X),
          when System.Low_Order_First  => To_NE_Bytes (Swap (X)));

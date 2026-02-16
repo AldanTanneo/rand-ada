@@ -7,6 +7,7 @@ package Rand_Core.Utils
 is
    subtype Bytes4 is Bytes (1 .. 4);
    subtype Bytes8 is Bytes (1 .. 8);
+   subtype Bytes16 is Bytes (1 .. 16);
 
    --  U32 functions
 
@@ -113,6 +114,36 @@ is
    --  Equivalent to `X / 2**(Amnt mod 64) + X * 2**(64 - Amnt mod 64)`.
 
    -- U128 functions
+
+   function From_LE_Bytes (Buf : Bytes16) return U128
+   with Inline;
+   --  Get the unsigned integer represented by the input bytes, in
+   --  little-endian order.
+
+   function To_LE_Bytes (X : U128) return Bytes16
+   with Inline;
+   --  Get the bytes representing the given unsigned integer, in
+   --  little-endian order.
+
+   function From_BE_Bytes (Buf : Bytes16) return U128
+   with Inline;
+   --  Get the unsigned integer represented by the input bytes, in
+   --  big-endian order.
+
+   function To_BE_Bytes (X : U128) return Bytes16
+   with Inline;
+   --  Get the bytes representing the given unsigned integer, in
+   --  big-endian order.
+
+   function From_NE_Bytes is new
+     Ada.Unchecked_Conversion (Source => Bytes16, Target => U128);
+   --  Get the unsigned integer represented by the input bytes, in
+   --  the native endianness order.
+
+   function To_NE_Bytes is new
+     Ada.Unchecked_Conversion (Source => U128, Target => Bytes16);
+   --  Get the bytes representing the given unsigned integer, in
+   --  the native endianness order.
 
    function Shl (X : U128; Amnt : Natural) return U128
    renames Interfaces.Shift_Left;
