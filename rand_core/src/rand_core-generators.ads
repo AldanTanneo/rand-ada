@@ -1,3 +1,20 @@
+--  A common interface type for pseudo-random number generators, or PRNGs.
+--  It requires the user to implement the `Next` and `Next_Bytes` subprograms.
+--  
+--  `Next` outputs U64 values, and `Next_Bytes` fills an array of
+--  bytes given as an `out` parameter. If your generator naturally corresponds
+--  to only one of those two modes, you can use the provided `Generic_Next` and
+--  `Generic_Next_Bytes` to implement the other one in a standard way.
+--
+--  It is also recommended to implement a secure constructor named `From_Rng`,
+--  which takes an instance of another PRNG and properly seeds the generator.
+--  This is useful (and necessary in security-sensitive contexts) for seeding
+--  the generator using system entropy.
+--
+--  This package also provides some utility methods on the Rng classwide type
+--  for generating basic types, as well as generic methods for generating
+--  floating point and integer values.
+
 package Rand_Core.Generators
   with Pure
 is
@@ -67,7 +84,8 @@ is
    function Generic_Integer (R : in out Rg) return I
    with Inline;
    --  Generic function to generate an integer value over the whole machine
-   --  range. Only supports sizes 8, 16, 32, 64 and 128.
+   --  range. Only supports sizes 8, 16, 32, 64 and 128. Do not use with
+   --  integer types that have a restricted range.
 
    function Gen (R : in out Rng'Class) return Short_Short_Integer
    with Inline_Always;
