@@ -29,13 +29,11 @@ is
 
    generic
       type Rg (<>) is limited new Rng with private;
-      with procedure Next_Bytes (R : in out Rg; Buf : out Bytes) is <>;
    function Generic_Next (R : in out Rg) return U64;
    --  Generic implementation of Next when Next_Bytes is provided
 
    generic
       type Rg (<>) is limited new Rng with private;
-      with function Next (R : in out Rg) return U64 is <>;
    procedure Generic_Next_Bytes (R : in out Rg; Buf : out Bytes);
    --  Generic implementation of Next_Bytes when Next is provided
 
