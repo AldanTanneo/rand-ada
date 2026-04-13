@@ -11,10 +11,11 @@ rand_core = { path = "../rand_core" }
 
 [build-switches]
 "*".ada_version = "Ada2022"
+"*".contracts = "Yes"
 
 [build-profiles]
-rand  = "validation"
-tests = "validation"
+rand  = "development"
+tests = "development"
 
 [[pins]]
 rand_distributions = { path='../rand_distributions' }
