@@ -143,9 +143,11 @@ is
          pragma Assert (Low <= High, "uniform distribution with empty range");
 
          pragma Suppress (Overflow_Check);
+         pragma Suppress (Range_Check);
          -- safe even when position cannot be represented in U128;
          -- unsigned substraction is equivalent to signed
          Span   : constant U128 := B'Pos (High) - B'Pos (Low) + 1;
+         pragma Unsuppress (Range_Check);
          pragma Unsuppress (Overflow_Check);
          Thresh : constant U128 := (if Span > 0 then (-Span) mod Span else 0);
       begin
