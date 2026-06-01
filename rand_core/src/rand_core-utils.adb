@@ -57,8 +57,15 @@ is
 
    use all type U128;
 
-   function Swap_Bytes (X : U128) return U128
-   is (System.Byte_Swapping.Bswap_128 (X));
+   Mask_32 : constant U64 := (2 ** 32) - 1;
+   Mask_64 : constant U128 := (2 ** 64) - 1;
+
+   function Swap_Bytes (X : U128) return U128 is
+      Hi : constant U64 := U64 (Shr (X, 64));
+      Lo : constant U64 := U64 (X and Mask_64);
+   begin
+      return Shl (U128 (Swap_Bytes (Lo)), 64) or U128 (Swap_Bytes (Hi));
+   end Swap_Bytes;
 
    function From_LE_Bytes (Buf : Bytes16) return U128
    is (case System.Default_Bit_Order is
@@ -79,9 +86,6 @@ is
    is (case System.Default_Bit_Order is
          when System.High_Order_First => To_NE_Bytes (X),
          when System.Low_Order_First  => To_NE_Bytes (Swap_Bytes (X)));
-
-   Mask_32 : constant U64 := (2 ** 32) - 1;
-   Mask_64 : constant U128 := (2 ** 64) - 1;
 
    procedure Wide_Mul (X, Y : U32; Hi, Lo : out U32) is
       Z : constant U64 := U64 (X) * U64 (Y);
