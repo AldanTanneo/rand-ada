@@ -9,6 +9,10 @@ licenses = "Apache-2.0 WITH LLVM-exception"
 website = "https://github.com/AldanTanneo/rand-ada"
 tags = ["random", "chacha20", "rng", "getrandom", "security"]
 
+[configuration]
+generate_ada = false
+generate_c = false
+
 [test]
 runner = "alire"
 
